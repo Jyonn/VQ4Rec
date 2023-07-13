@@ -33,17 +33,22 @@
 `null` (23-19)
 
 ## NIPS
+`null` (22-21)
 
 ## ICML
-
+- Supervised Quantile Normalization for Low Rank Matrix Factorization
 ## CVPR
-
+`null` (22-21)
 ## ICCV
+- Generalizable Mixed-Precision Quantization via Attribution Rank Preservation
+- Self-supervised Product Quantization for Deep Unsupervised Image Retrieval
+- Bayesian Triplet Loss: Uncertainty Quantification in Image Retrieval
 
 ## ECCV
+`null` (21-20 ?)
 
 ## MM
-
+`null` (22-20)
 ## SIGIR
 
 ### SIGIR 2022

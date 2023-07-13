@@ -1,5 +1,34 @@
 # Awesome Papers Using Vector Quantization for Recommender System
 
+## arXiv
+
+### Recommender Systems
+
+- Learning Vector-Quantized Item Representation for Transferable Sequential Recommenders
+- Learning Binarized Graph Representations with Multi-faceted Quantization Reinforcement for Top-K Recommendation
+- Towards Low-loss 1-bit Quantization of User-item Representations for Top-K Recommendation
+- Low-Precision Quantization for Efficient Nearest Neighbor Search
+- Click-through Rate Prediction with Auto-Quantized Contrastive Learning
+- Learning Multi-granular Quantized Embeddings for Large-Vocab Categorical Features in Recommender Systems
+
+### Information Retrieval
+
+- Efficient Document Retrieval by End-to-End Refining and Quantizing BERT Embedding with Contrastive Product Quantization
+- Self-Supervised Consistent Quantization for Fully Unsupervised Image Retrieval
+- Distill-VQ: Learning Retrieval Oriented Vector Quantization By Distilling Knowledge from Dense Embeddings
+- Efficient Cross-Modal Retrieval via Deep Binary Hashing and Quantization
+- Hybrid Contrastive Quantization for Efficient Cross-View Video Retrieval
+- Pyramid Hybrid Pooling Quantization for Efficient Fine-Grained Image Retrieval
+- Contrastive Quantization with Code Memory for Unsupervised Image Retrieval
+- Self-supervised Product Quantization for Deep Unsupervised Image Retrieval
+- Jointly Optimizing Query Encoder and Product Quantization to Improve Retrieval Performance
+- Orthonormal Product Quantization Network for Scalable Face Image Retrieval
+- Joint Learning of Deep Retrieval Model and Product Quantization based Embedding Index
+- Matching-oriented Product Quantization For Ad-hoc Retrieval
+- Generalized Product Quantization Network for Semi-supervised Image Retrieval
+- End-to-End Supervised Product Quantization for Image Search and Retrieval
+
+
 ## ICLR
 
 ## NIPS
@@ -132,3 +161,22 @@ Quantized Adversarial Training: An Iterative Quantized Local Search Approach
 ## ICDE
 
 `null`
+
+## TKDE
+
+- Product Quantized Collaborative Filtering
+
+## TNNLS
+
+- Angular Deep Supervised Vector Quantization for Image Retrieval.
+- Discriminative Deep Quantization Hashing for Face Image Retrieval
+
+## PAMI
+
+- Adversarial Examples Generation for Deep Product Quantization Networks on Image Retrieval
+- Sub-Selective Quantization for Learning Binary Codes in Large-Scale Image Search
+- Scalable Feature Matching by Dual Cascaded Scalar Quantization for Image Retrieval
+- Iterative Quantization: A Procrustean Approach to Learning Binary Codes for Large-Scale Image Retrieval
+- Product Quantization for Nearest Neighbor Search
+- Scalable Face Image Retrieval with Identity-Based Quantization and Multireference Reranking
+- 

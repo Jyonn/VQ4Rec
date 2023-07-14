@@ -1,4 +1,4 @@
-# Awesome Papers Using Vector Quantization for Recommender System
+# Awesome Papers Using Vector Quantization for Information Retrieval
 
 ## arXiv
 
@@ -29,27 +29,65 @@
 - (2020) Generalized Product Quantization Network for Semi-supervised Image Retrieval
 - (2017) End-to-End Supervised Product Quantization for Image Search and Retrieval
 
-
 ## ICLR
-`null` (23-19)
+`null`
 
 ## NIPS
-`null` (22-21)
+`null`
 
 ## ICML
+
+### ICML 2020
+
 - Supervised Quantile Normalization for Low Rank Matrix Factorization
+
 ## CVPR
-`null` (22-21)
+
+### CVPR 2022
+
+- Mutual Quantization for Cross-Modal Search with Noisy Labels
+
+### CVPR 2020
+
+- Central Similarity Quantization for Efficient Image and Video Retrieval
+
+### CVPR 2019
+
+- End-To-End Supervised Product Quantization for Image Search and Retrieval
+- Deep Spherical Quantization for Image Search
+
+### CVPR 2018
+
+- Deep Visual-Semantic Quantization for Efficient Image Retrieval
+
+### CVPR 2017
+
+- Supervised Quantization for Similarity Search
+- Collaborative Quantization for Cross-Modal Similarity Search
+
+### CVPR 2016
+
+- Tree quantization for large-scale similarity search and classification
+
 ## ICCV
+
+### ICCV 2021
+
 - Generalizable Mixed-Precision Quantization via Attribution Rank Preservation
 - Self-supervised Product Quantization for Deep Unsupervised Image Retrieval
+- Product Quantizer Aware Inverted Index for Scalable Nearest Neighbor Search
 - Bayesian Triplet Loss: Uncertainty Quantification in Image Retrieval
 
 ## ECCV
-`null` (21-20 ?)
+`null`
 
 ## MM
-`null` (22-20)
+
+### MM 2019
+
+- Semi-supervised Deep Quantization for Cross-modal Search
+- Scalar quantization for large scale image search
+
 ## SIGIR
 
 ### SIGIR 2022
@@ -171,18 +209,18 @@
 
 ## TKDE
 
-- Product Quantized Collaborative Filtering
+- (2021) Product Quantized Collaborative Filtering
 
 ## TNNLS
 
-- Angular Deep Supervised Vector Quantization for Image Retrieval.
-- Discriminative Deep Quantization Hashing for Face Image Retrieval
+- (2022) Angular Deep Supervised Vector Quantization for Image Retrieval.
+- (2018) Discriminative Deep Quantization Hashing for Face Image Retrieval
 
 ## PAMI
 
-- Adversarial Examples Generation for Deep Product Quantization Networks on Image Retrieval
-- Sub-Selective Quantization for Learning Binary Codes in Large-Scale Image Search
-- Scalable Feature Matching by Dual Cascaded Scalar Quantization for Image Retrieval
-- Iterative Quantization: A Procrustean Approach to Learning Binary Codes for Large-Scale Image Retrieval
-- Product Quantization for Nearest Neighbor Search
-- Scalable Face Image Retrieval with Identity-Based Quantization and Multireference Reranking
+- (2023) Adversarial Examples Generation for Deep Product Quantization Networks on Image Retrieval
+- (2018) Sub-Selective Quantization for Learning Binary Codes in Large-Scale Image Search
+- (2016) Scalable Feature Matching by Dual Cascaded Scalar Quantization for Image Retrieval
+- (2013) Iterative Quantization: A Procrustean Approach to Learning Binary Codes for Large-Scale Image Retrieval
+- (2011) Product Quantization for Nearest Neighbor Search
+- (2011) Scalable Face Image Retrieval with Identity-Based Quantization and Multireference Reranking

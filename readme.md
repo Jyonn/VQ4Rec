@@ -4,29 +4,30 @@
 
 ### Recommender Systems
 
-- Learning Vector-Quantized Item Representation for Transferable Sequential Recommenders
-- Learning Binarized Graph Representations with Multi-faceted Quantization Reinforcement for Top-K Recommendation
-- Towards Low-loss 1-bit Quantization of User-item Representations for Top-K Recommendation
-- Low-Precision Quantization for Efficient Nearest Neighbor Search
-- Click-through Rate Prediction with Auto-Quantized Contrastive Learning
-- Learning Multi-granular Quantized Embeddings for Large-Vocab Categorical Features in Recommender Systems
+- (2023) Recommender Systems with Generative Retrieval
+- (2022) Learning Vector-Quantized Item Representation for Transferable Sequential Recommenders
+- (2022) Learning Binarized Graph Representations with Multi-faceted Quantization Reinforcement for Top-K Recommendation
+- (2021) Towards Low-loss 1-bit Quantization of User-item Representations for Top-K Recommendation
+- (2021) Low-Precision Quantization for Efficient Nearest Neighbor Search
+- (2021) Click-through Rate Prediction with Auto-Quantized Contrastive Learning
+- (2020) Learning Multi-granular Quantized Embeddings for Large-Vocab Categorical Features in Recommender Systems
 
 ### Information Retrieval
 
-- Efficient Document Retrieval by End-to-End Refining and Quantizing BERT Embedding with Contrastive Product Quantization
-- Self-Supervised Consistent Quantization for Fully Unsupervised Image Retrieval
-- Distill-VQ: Learning Retrieval Oriented Vector Quantization By Distilling Knowledge from Dense Embeddings
-- Efficient Cross-Modal Retrieval via Deep Binary Hashing and Quantization
-- Hybrid Contrastive Quantization for Efficient Cross-View Video Retrieval
-- Pyramid Hybrid Pooling Quantization for Efficient Fine-Grained Image Retrieval
-- Contrastive Quantization with Code Memory for Unsupervised Image Retrieval
-- Self-supervised Product Quantization for Deep Unsupervised Image Retrieval
-- Jointly Optimizing Query Encoder and Product Quantization to Improve Retrieval Performance
-- Orthonormal Product Quantization Network for Scalable Face Image Retrieval
-- Joint Learning of Deep Retrieval Model and Product Quantization based Embedding Index
-- Matching-oriented Product Quantization For Ad-hoc Retrieval
-- Generalized Product Quantization Network for Semi-supervised Image Retrieval
-- End-to-End Supervised Product Quantization for Image Search and Retrieval
+- (2022) Efficient Document Retrieval by End-to-End Refining and Quantizing BERT Embedding with Contrastive Product Quantization
+- (2022) Self-Supervised Consistent Quantization for Fully Unsupervised Image Retrieval
+- (2022) Distill-VQ: Learning Retrieval Oriented Vector Quantization By Distilling Knowledge from Dense Embeddings
+- (2022) Efficient Cross-Modal Retrieval via Deep Binary Hashing and Quantization
+- (2022) Hybrid Contrastive Quantization for Efficient Cross-View Video Retrieval
+- (2021) Pyramid Hybrid Pooling Quantization for Efficient Fine-Grained Image Retrieval
+- (2021) Contrastive Quantization with Code Memory for Unsupervised Image Retrieval
+- (2021) Self-supervised Product Quantization for Deep Unsupervised Image Retrieval
+- (2021) Jointly Optimizing Query Encoder and Product Quantization to Improve Retrieval Performance
+- (2021) Orthonormal Product Quantization Network for Scalable Face Image Retrieval
+- (2021) Joint Learning of Deep Retrieval Model and Product Quantization based Embedding Index
+- (2021) Matching-oriented Product Quantization For Ad-hoc Retrieval
+- (2020) Generalized Product Quantization Network for Semi-supervised Image Retrieval
+- (2017) End-to-End Supervised Product Quantization for Image Search and Retrieval
 
 
 ## ICLR
@@ -103,7 +104,7 @@
 
 ### ICDM 2019
 
-Quantized Adversarial Training: An Iterative Quantized Local Search Approach
+- Quantized Adversarial Training: An Iterative Quantized Local Search Approach
 
 ## AAAI
 
@@ -185,4 +186,3 @@ Quantized Adversarial Training: An Iterative Quantized Local Search Approach
 - Iterative Quantization: A Procrustean Approach to Learning Binary Codes for Large-Scale Image Retrieval
 - Product Quantization for Nearest Neighbor Search
 - Scalable Face Image Retrieval with Identity-Based Quantization and Multireference Reranking
-- 

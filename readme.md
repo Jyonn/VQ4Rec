@@ -52,7 +52,7 @@
 - (IR) [arXiv] Jointly Optimizing Query Encoder and Product Quantization to Improve Retrieval Performance
 - (IR) [arXiv] Orthonormal Product Quantization Network for Scalable Face Image Retrieval
 - (IR) [arXiv] Joint Learning of Deep Retrieval Model and Product Quantization based Embedding Index
-- (IR) [arXiv] Matching-oriented Product Quantization For Ad-hoc Retrieval
+- [x] (IR) [arXiv] Matching-oriented Product Quantization For Ad-hoc Retrieval
 - [x] (RS) [arXiv] Embedding-based Recommender System for Job to Candidate Matching on Scale
 - 
 ## 2020

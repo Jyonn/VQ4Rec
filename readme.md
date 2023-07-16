@@ -2,9 +2,9 @@
 
 ## 2023
 
-- (IR) [AAAI] Query-Aware Quantization for Maximum Inner Product Search
-- (IR) [PAMI] Adversarial Examples Generation for Deep Product Quantization Networks on Image Retrieval
-- (RS, IR) [WWW] Diferentiable Optimized Product Qantization and Beyond
+- [x] (RS, IR) [AAAI] Query-Aware Quantization for Maximum Inner Product Search | `Product Quantization`, `Matching`
+- [x] (IR) [PAMI] Adversarial Examples Generation for Deep Product Quantization Networks on Image Retrieval | `Product Quantization`, `Adversarial Attack` 
+- (RS, IR) [WWW] Differentiable Optimized Product Quantization and Beyond
 - (RS) [TOIS] ReFRS: Resource-efficient Federated Recommender System for Dynamic and Diversified User Preferences
 - (RS) [WWW] Quantize Sequential Recommenders Without Private Data
 - (RS) [WWW] Learning Vector-Quantized Item Representation for Transferable Sequential Recommenders

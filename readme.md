@@ -53,7 +53,7 @@
 - (IR) [arXiv] Orthonormal Product Quantization Network for Scalable Face Image Retrieval
 - (IR) [arXiv] Joint Learning of Deep Retrieval Model and Product Quantization based Embedding Index
 - (IR) [arXiv] Matching-oriented Product Quantization For Ad-hoc Retrieval
-- (RS) [arXiv] Embedding-based Recommender System for Job to Candidate Matching on Scale
+- [x] (RS) [arXiv] Embedding-based Recommender System for Job to Candidate Matching on Scale
 - 
 ## 2020
 

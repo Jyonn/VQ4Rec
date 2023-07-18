@@ -67,8 +67,8 @@
 ## 2019
 
 - [x] (IR) [IJCAI] Beyond Product Quantization: Deep Progressive Quantization for Image Retrieval ｜ `Retrieval`,`Image`
-- [ ] (IR) [AAAI] Similarity Preserving Deep Asymmetric Quantization for Image Retrieval
-- (IR) [ICDM] Quantized Adversarial Training: An Iterative Quantized Local Search Approach
+- [x] (IR) [AAAI] Similarity Preserving Deep Asymmetric Quantization for Image Retrieval | `Retrieval`,`Low complexity`
+- [ ] (IR) [ICDM] Quantized Adversarial Training: An Iterative Quantized Local Search Approach | `Adversarial Attack` <!---not model quantization-->
 - (IR) [CVPR] End-To-End Supervised Product Quantization for Image Search and Retrieval
 - (IR) [CVPR] Deep Spherical Quantization for Image Search
 - (IR) [MM] Semi-supervised Deep Quantization for Cross-modal Search

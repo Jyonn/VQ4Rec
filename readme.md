@@ -71,7 +71,11 @@ If you find this repository useful for your research, please consider citing our
 }
 ```
 
+<details open>
+
+<summary>
 ## Introduction
+</summary>
 
 <p align="center">
 <img src="images/PaperCount.png" alt="paper count" width="500px"/>
@@ -93,6 +97,8 @@ Despite the growing interest in VQ4Rec amidst new challenges posed by large lang
 - We provide systematic taxonomies of VQ4Rec from various perspectives such as training phase, application scenario, VQ techniques, and quantization target.
 - We conduct a thorough analysis of the strengths, weaknesses, and limitations of existing VQ4Rec methods, focusing on addressing two main challenges in recommender system: efficiency and quality.
 - We identify key challenges in VQ4Rec and present promising opportunities that can serve as inspiration for future research in this burgeoning field.
+
+</details>
 
 <p align="center">
 <img src="images/VQs.png" alt="VQ techniques" width="1000px"/>

@@ -58,10 +58,23 @@
 
 Vector quantization, renowned for its unparalleled feature compression capabilities, has been a prominent topic in signal processing and machine learning research for several decades and remains widely utilized today. With the emergence of large models and generative AI, vector quantization has gained popularity in recommender systems, establishing itself as a preferred solution. This paper starts with a comprehensive review of vector quantization techniques. It then explores systematic taxonomies of vector quantization methods for recommender systems (VQ4Rec), examining their applications from multiple perspectives. Further, it provides a thorough introduction to research efforts in diverse recommendation scenarios, including efficiency-oriented approaches and quality-oriented approaches. Finally, the survey analyzes the remaining challenges and anticipates future trends in VQ4Rec, including the challenges associated with the training of vector quantization, the opportunities presented by large language models, and emerging trends in multimodal recommender systems. We hope this survey can pave the way for future researchers in the recommendation community and accelerate their exploration in this promising field.
 
+## Citation
+
+If you find this repository useful for your research, please consider citing our paper:
+
+```
+@article{liu2024vector,
+  title={Vector Quantization for Recommender Systems: A Review and Outlook},
+  author={Liu, Qijiong and Dong, Xiaoyu and Xiao, Jiaren and Chen, Nuo and Hu, Hengchang and Zhu, Jieming and Zhu, Chenxu and Sakai, Tetsuya and Wu, Xiao-Ming},
+  journal={Under Review},
+  year={2024}
+}
+```
+
 ## Introduction
 
 <p align="center">
-<img src="images/PaperCount.png" alt="paper_count" width="500px"/>
+<img src="images/PaperCount.png" alt="paper count" width="500px"/>
 <kbd align="center">Figure 1: Interest in VQ4Rec over time. :black_flag: denotes a milestone event or a representative paper.</kbd>
 </p>
 
@@ -80,3 +93,19 @@ Despite the growing interest in VQ4Rec amidst new challenges posed by large lang
 - We provide systematic taxonomies of VQ4Rec from various perspectives such as training phase, application scenario, VQ techniques, and quantization target.
 - We conduct a thorough analysis of the strengths, weaknesses, and limitations of existing VQ4Rec methods, focusing on addressing two main challenges in recommender system: efficiency and quality.
 - We identify key challenges in VQ4Rec and present promising opportunities that can serve as inspiration for future research in this burgeoning field.
+
+<p align="center">
+<img src="images/VQs.png" alt="VQ techniques" width="1000px"/>
+<kbd align="center">Figure 2: Illustration of the three classical VQ techniques. :magnifying_glass_tilted_left: indicates nearest neighbor search.</kbd>
+</p>
+
+<kbd align="center">Table 1: Comparison of the three classical VQ techniques. We use $\bar{K}=\frac{1}{M} \sum_i K_i$ to represent the arithmetic mean of $K_i$, and $\hat{K}=\sqrt[M]{\prod_i K_i}$ to represent their geometric mean, where $i \in \{1, 2, \ldots, M\}$. Note that when $K_i=K$, $\bar{K} = \hat{K} = K$.</kbd>
+
+|               | Input Dim | \#Codebooks | \#Codes per Book | Code Dim |       Codebook Size       | Feature Space |
+|:-------------:|:---------:|:-----------:|:----------------:|:--------:|:-------------------------:|:-------------:|
+|  Standard VQ  |    $D$    |     $1$     |       $K$        |   $D$    |        $K \cdot D$        |      $K$      |
+|  Parallel VQ  |    $D$    |     $M$     |      $K_i$       | $D / M$  |     $\bar{K} \cdot D$     |  $\hat{K}^M$  |
+| Sequential VQ |    $D$    |     $M$     |      $K_i$       |   $D$    | $M \cdot \bar{K} \cdot D$ |  $\hat{K}^M$  |
+
+## Overview of VQ Techniques
+

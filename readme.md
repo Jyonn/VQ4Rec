@@ -101,28 +101,81 @@ Despite the growing interest in VQ4Rec amidst new challenges posed by large lang
 <kbd align="center">Figure 2: Illustration of the three classical VQ techniques. :magnifying_glass_tilted_left: indicates nearest neighbor search.</kbd>
 </p>
 
-<kbd align="center">Table 1: Comparison of the three classical VQ techniques. We use $\bar{K}=\frac{1}{M} \sum_i K_i$ to represent the arithmetic mean of $K_i$, and $\hat{K}=\sqrt[M]{\prod_i K_i}$ to represent their geometric mean, where $i \in \{1, 2, \ldots, M\}$. Note that when $K_i=K$, $\bar{K} = \hat{K} = K$.</kbd>
+<kbd align="center">Table 1: Comparison of the three classical VQ techniques. We use $\bar{K}=\frac{1}{M} \sum_i K\_i$ to represent the arithmetic mean of $K_i$, and $\hat{K}=\sqrt[M]{\prod_i K\_i}$ to represent their geometric mean, where $i \in \{1, 2, \ldots, M\}$. Note that when $K_i=K$, $\bar{K} = \hat{K} = K$.</kbd>
 
 |               | Input Dim | \#Codebooks | \#Codes per Book | Code Dim |       Codebook Size       | Feature Space |
 |:-------------:|:---------:|:-----------:|:----------------:|:--------:|:-------------------------:|:-------------:|
 |  Standard VQ  |    $D$    |     $1$     |       $K$        |   $D$    |        $K \cdot D$        |      $K$      |
-|  Parallel VQ  |    $D$    |     $M$     |      $K_i$       | $D / M$  |     $\bar{K} \cdot D$     |  $\hat{K}^M$  |
-| Sequential VQ |    $D$    |     $M$     |      $K_i$       |   $D$    | $M \cdot \bar{K} \cdot D$ |  $\hat{K}^M$  |
+|  Parallel VQ  |    $D$    |     $M$     |      $K\_i$      | $D / M$  |     $\bar{K} \cdot D$     |  $\hat{K}^M$  |
+| Sequential VQ |    $D$    |     $M$     |      $K\_i$      |   $D$    | $M \cdot \bar{K} \cdot D$ |  $\hat{K}^M$  |
 
 VQ targets at grouping similar vectors into clusters by representing them with a small set of prototype vectors (i.e., codes in the codebook). In this section, we offer a comprehensive summary of classical VQ methods and the modern differentiable VQ technique. The conventional VQ approaches include standard VQ, which uses a single codebook, parallel VQ, which utilizes multiple codebooks simultaneously to represent separate vector subspaces, and sequential VQ, which involves using multiple codebooks in a sequence to refine the quantization.
 
 ### Standard Vector Quantization
 
-The standard VQ~\citep{buzo1980speech,vq} serves as the atomic component for the latter two VQ techniques. Formally, given a set of object vectors $\mathbf{E} \in \mathbb{R}^{N \times D}$, a function $f$ (e.g., $k$-means) is required to produce a codebook $\mathbf{C} \in \mathbb{R}^{K \times D}$ such that the sum of distances between all vectors in $\mathbf{E}$ and their corresponding nearest code vectors in $\mathbf{C}$ is minimized, as illustrated in Figure~\ref{fig:vqs}(a). We can formally express this using the following equations:
+The standard VQ~\citep{buzo1980speech,vq} serves as the atomic component for the latter two VQ techniques. Formally, given a set of object vectors $\mathbf{E} \in \mathbb{R}^{N \times D}$, a function $f$ (e.g., $k$-means) is required to produce a codebook $\mathbf{C} \in \mathbb{R}^{K \times D}$ such that the sum of distances between all vectors in $\mathbf{E}$ and their corresponding nearest code vectors in $\mathbf{C}$ is minimized, as illustrated in Figure 2(a). We can formally express this using the following equations:
 
 $$
 \displaylines{f: \mathbf{E} \rightarrow \mathbf{C}, \\
-\textit{where }\mathbf{C} = \underset{\mathbf{W} \in \mathbb{R}^{K \times D}}{\text{argmin}} \sum_{i} d(\mathbf{e}\_i, \mathbf{w}\_{x}), \\
-\textit{and }x = \underset{j=1,\ldots,K}{\text{argmin}}\, d\left(\mathbf{e}_i, \mathbf{w}_j\right),}
+\textit{where }\mathbf{C} = \underset{\mathbf{W} \in \mathbb{R}^{K \times D}}{\text{argmin}} \sum\_{i} d(\mathbf{e}\_i, \mathbf{w}\_{x}), \\
+\textit{and }x = \underset{j=1,\ldots,K}{\text{argmin}}\, d\left(\mathbf{e}\_i, \mathbf{w}\_j\right),}
 $$
 
 where $N$ is the number of object vectors and $K$ is the number of code vectors in the codebook (usually $N \gg K$), $\mathbf{e}_i$ is the $i$-th object vector, $D$ is the embedding dimension, $d$ represents the distance function (e.g., Euclidean distance or Manhattan distance), $\mathbf{W}$ denotes any codebook in the same space as $\mathbf{C}$, and $x$ is the index of the code vector closest to $\mathbf{e}_i$. Therefore, we can use $\mathbf{c}_x$, the $x$-th code in codebook $\mathbf{C}$, to approximate $\mathbf{e}_i$:
 
 $$
-\mathbf{e}_i \approx \mathbf{c}_{x}.
+\mathbf{e}\_i \approx \mathbf{c}\_{x}.
 $$
+
+### Parallel Vector Quantization
+
+As the embedding dimension $D$ increases, standard VQ methods face significant challenges in terms of storage requirements, computational efficiency, and quantization quality. In response to these challenges, approaches like product quantization and optimized product quantization, representative of parallel quantization techniques, emerge as effective solutions. These methods segment high-dimensional vectors into multiple lower-dimensional sub-vectors and perform quantization on each segment independently. As shown in Table 1, with an increase in the number of segments ($M$), there is a corresponding reduction in the dimensionality of each code, keeping the codebook storage size unchanged. Yet, the representation space exhibits an exponential growth compared to that of standard VQ.
+
+#### Product Quantization (PQ) 
+
+Product Quantization (PQ) represents an initial approach to parallel quantization, where original high-dimensional vectors are segmented into uniformly-sized sub-vectors. This process can be mathematically represented as $\mathbf{E} = \left[\mathbf{E}^{(1)}, \mathbf{E}^{(2)}, \cdots, \mathbf{E}^{(M)} \right]$, where $M$ denotes the number of the segments and the number of the codebooks, and $\mathbf{E}^{(i)} \in \mathrm{R}^{N \times \frac{D}{M}}$. Each sub-vector is then independently subjected to standard VQ, utilizing a distinct codebook for each segment. Therefore, the $i$-th original vector can be approximated by selecting and concatenating each single code vector $\mathbf{c}^{(j)}_{x_j}$ from each sub-codebook $\mathbf{C}^{(j)}$, which can be formulated as:
+ 
+$$
+\mathbf{e}\_i = \left[\cdots, \mathbf{e}\_i^{(j)}, \cdots \right] \approx \left[\cdots, \mathbf{c}^{(j)}\_{x\_j}, \cdots,\right] \quad \text{for } j \in \{1, 2, \ldots, M\},
+$$
+
+where $\mathbf{C}^{(j)}$ is the $j$-th codebook with size $K\_j$, and $x\_j$ is the index of the code vector in $\mathbf{C}^{(j)}$ closest to $\mathbf{e}\_i^{(j)}$.
+Due to its storage efficiency and capability for fast approximate nearest neighbor searches, product quantization has become a popular solution in the information retrieval domain, particularly for image retrieval tasks, as evidenced by several studies~\cite{cao2017deep,jang2021self,chen2022adversarial}. Nonetheless, it overlooks the potential for significant inter-correlations among sub-vectors, which may affect the quantization performance and subsequent downstream tasks.
+
+#### Optimized Product Quantizaiton (OPQ)
+
+To eliminate the interdependence among multiple subspaces, optimized product quantization is introduced and uses the learnable rotation matrix $\mathbf{R} \in \mathbb{R}^{D \times D}$ for automatically selecting the most effective orientation of the data in the high-dimensional space. Such rotation minimizes the interdependence among different subspaces, allowing for a more efficient and independent quantization process, which can be defined as:
+
+$$
+\displaylines{\mathbf{E}^\prime = \mathbf{E} \times \mathbf{R}, \\
+\mathbf{I} = \mathbf{R}^T \times \mathbf{R},}
+$$
+
+where $\mathbf{E}^\prime$ is the rotated matrix, and $\mathbf{I}$ represents the identity matrix. Next, $\mathbf{E}^\prime$ will be operated by product quantization, as described in Sec~\ref{sec:pq}. It is important to note that the rotation matrix $\mathbf{R}$ is trained with the codebooks.
+Once trained, the $i$-th original vector can be approximated by:
+
+$$
+\mathbf{e}\_i \approx \left[\cdots, \mathbf{c}^{(j)}_{x\_j}, \cdots,\right] \times \mathbf{R}^T \quad \text{for } j \in \{1, 2, \ldots, M\}.
+$$
+
+### Sequential Vector Quantization
+
+Standard VQ and parallel VQ typically yield _rough_ approximations of vectors. Specifically, each dimension of the original vector can only be approximated by one single value from the corresponding code vector, leading to substantial information loss. 
+Taking standard VQ as an example, the difference between the original vector $\mathbf{e}$ and its corresponding code $\mathbf{c}$, denoted by $\mathbf{e}-\mathbf{c}$, reflects the unique characteristics that cannot be represented by $\mathbf{c}$.
+
+To achieve a more _precise_ quantization, approaches like residual quantization~\cite{juang1982multiple,rq} and additive quantization~\cite{aq} have been developed, falling under the umbrella of sequential quantization. This method employs multiple codebooks, with each codebook approximates every dimension of the original vectors. Essentially, every codebook offers a distinct approximation perspective of the vectors, and the accuracy of these approximations improves with an increase in the number of codebooks. As illustrated in Figure 2, using the first layer codebook approximates `0.3` (the first dimension of the original vector) as `0.5` (the first dimension of the code vector in the first codebook). After applying the second codebook, it is more accurately approximated as `0.5 + (-0.3) = 0.2` (the first dimension of the code vector in the second codebook).
+
+#### Residual Quantization (RQ)
+
+By designing $M$ individual codebooks where, as depicted in Table 1, code vectors have the full same length of the input vector, residual quantization aims to approximate the target vectors by compressing their information in a coarse-to-fine manner. Specifically, the codebooks are learned iteratively from the residual representations of the vectors. This process can be formulated as: $\mathbf{E}^{(j+1)} = \mathbf{E}^{(j)} - \mathbf{X}^{(j)}\mathbf{C}^{(j)}$, where $\mathbf{E}^1 = \mathbf{E}$, $\mathbf{C}^{(j)}$ is the $j$-th codebook with size $K\_j$, and $\mathbf{X}^{(j)} \in \mathrm{\{0, 1\}}^{N}$ is a one-hot mapper, where $\mathbf{X}^{(j)}\_{i,k}=1$ only if the $k$-th code is the nearest to the $i$-th vector of $\mathbf{E}^{(j)}$ in the codebook $\mathbf{C}^{(j)}$. After iteratively residual approximation, the $i$-th original vector can be represented by:
+
+$$
+\displaylines{\mathbf{e}\_i \approx \sum_j^M \mathbf{c}^{(j)}\_{x\_j}, \\
+\textit{where }x\_j = \underset{k}{\text{argmin}}\,\mathbf{X}^{(j)}\_{i,k}.}
+$$
+
+It is important to note that, as $M$ increases, the approximated representation tends to be finer.
+
+#### Additive Quantization (AQ)
+
+Similar to residual quantization, additive quantization aims to approximate the target vectors by aggregating one selected code per codebook. However, residual quantization employs a greedy approach by selecting only the _nearest_ neighbor (i.e., $\mathbf{c}^{(j)}\_{x\_j}$) within the current (i.e., $j$-th) layer, which does not guarantee the global optimum. Instead, codebooks here are sequentially learned using beam search, where top candidate code combinations (_not the only one_) from the first $j$ codebooks are selected to infer the $(j+1)$-th codebook. Hence, the $i$-th original vector can be approximated just as that in residual quantization.

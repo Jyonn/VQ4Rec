@@ -123,12 +123,15 @@ VQ targets at grouping similar vectors into clusters by representing them with a
 ### Standard Vector Quantization
 
 The standard VQ~\citep{buzo1980speech,vq} serves as the atomic component for the latter two VQ techniques. Formally, given a set of object vectors $\mathbf{E} \in \mathbb{R}^{N \times D}$, a function $f$ (e.g., $k$-means) is required to produce a codebook $\mathbf{C} \in \mathbb{R}^{K \times D}$ such that the sum of distances between all vectors in $\mathbf{E}$ and their corresponding nearest code vectors in $\mathbf{C}$ is minimized, as illustrated in Figure~\ref{fig:vqs}(a). We can formally express this using the following equations:
+
 $$
 \displaylines{f: \mathbf{E} \rightarrow \mathbf{C}, \\
 \textit{where }\mathbf{C} = \underset{\mathbf{W} \in \mathbb{R}^{K \times D}}{\text{argmin}} \sum_{i} d(\mathbf{e}\_i, \mathbf{w}\_{x}), \\
 \textit{and }x = \underset{j=1,\ldots,K}{\text{argmin}}\, d\left(\mathbf{e}_i, \mathbf{w}_j\right),}
 $$
+
 where $N$ is the number of object vectors and $K$ is the number of code vectors in the codebook (usually $N \gg K$), $\mathbf{e}_i$ is the $i$-th object vector, $D$ is the embedding dimension, $d$ represents the distance function (e.g., Euclidean distance or Manhattan distance), $\mathbf{W}$ denotes any codebook in the same space as $\mathbf{C}$, and $x$ is the index of the code vector closest to $\mathbf{e}_i$. Therefore, we can use $\mathbf{c}_x$, the $x$-th code in codebook $\mathbf{C}$, to approximate $\mathbf{e}_i$:
+
 $$
 \mathbf{e}_i \approx \mathbf{c}_{x}.
 $$

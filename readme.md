@@ -269,7 +269,7 @@ Parallel and sequential quantization both aim to establish one-to-one mappings b
 ## Quality-oriented Applications
 
 Building high-quality recommender systems is imperative to effectively cater to users' increasing information demands. 
-Both academia and industry have explored various strategies to this end. These strategies include data augmentation, as demonstrated by Song et al., which entails generating synthetic data from existing datasets through techniques like item masking Slokom et al. Additionally, hyperparameter tuning, exemplified by Wu et al., automates the optimization of model settings, thereby mitigating the laborious process of grid search. Moreover, feature engineering, as elucidated by Schifferer, enhances feature selection and data preprocessing.
+Both academia and industry have explored various strategies to this end. These strategies include data augmentation, as demonstrated by Song et al., which entails generating synthetic data from existing datasets through techniques like item masking. Additionally, hyperparameter tuning, exemplified by Wu et al., automates the optimization of model settings, thereby mitigating the laborious process of grid search. Moreover, feature engineering, as elucidated by Schifferer, enhances feature selection and data preprocessing.
 
 VQ enhances recommender system quality by serving as a foundational step, specifically in item indexing for generative retrieval, a process which is further detailed in discrete tokenization applications. Furthermore, VQ aligns diverse modalities with soft constraints, facilitating multimodal feature learning.
 
@@ -281,7 +281,7 @@ By integrating features such as item combination patterns and category informati
 To effectively utilize the data of active users, Pan et al. apply VQ to user interest clusters, facilitating cluster-level contrastive learning, which balances the personalization of representations between inactive and active users.
 Their auto-quantized approach captures cluster-level similarities through VQ, in contrast to SimCLR proposed by Chen et al., which focuses solely on instance-level similarities.
 To harness item combination patterns, Luo et al. propose VQA, which combines neural attention mechanism and VQ to determine the attention of candidate combination patterns.
-To continuously generate and optimize the entity category trees over time, another study, CAGE_liu2024cage_ enables the simultaneous learning and refinement of categorical code representations and entity embeddings in an end-to-end manner for ID-based recommendation.
+To continuously generate and optimize the entity category trees over time, another study, CAGE enables the simultaneous learning and refinement of categorical code representations and entity embeddings in an end-to-end manner for ID-based recommendation.
 
 However, these efforts rely on ID-based approaches, which may not be optimal in current diverse multimodal content landscape. Exploring methods to effectively leverage VQ techniques to enhance information from text, images, and other multimodal sources, and integrating it with recommendation features, presents a promising avenue for research.
 
@@ -291,16 +291,51 @@ Another interesting branch of work aims to improve modality alignment in recomme
 Transferable recommender systems are becoming increasingly important which can quickly adapt to new domains or scenarios. 
 However, ensuring the alignment of various modalities and preserving their distinct patterns throughout downstream training models remains a challenge.
 
-Under transferable scenario, VQ can be used for loosening the binding between item _text_ and _ID _representation, as a sparse representation technique. Hou et al. introduce VQ to represent items in a compact form, capturing the diverse characteristics of the products and addressing the transferability issues in sequential recommender systems. 
+Under transferable scenario, VQ can be used for loosening the binding between item _text_ and _ID_ representation, as a sparse representation technique. Hou et al. introduce VQ to represent items in a compact form, capturing the diverse characteristics of the products and addressing the transferability issues in sequential recommender systems. 
 In contrast, Hu et al. employ product quantization to impose additional modality constraints, targeting the mitigation of the modality forgetting issue in two-stage sequential recommenders. This involves transforming dissected _text_ and _visual_ correlations into discrete codebook representations to enforce tighter constraints.
 
 Hence, VQ serves as a potent semantic bridge, particularly with the rise of Large Language Models (LLMs), facilitating connectivity across diverse modalities or domains. However, existing approaches primarily focus on aligning two modalities. Addressing multimodal scenarios involving more than three modalities necessitates novel solutions.
 
 ### Discrete Tokenization
 
-Tokenizing items and users in recommender systems has involved numerous strategies. Traditional methods often use atomic item identifiers (IDs), which can result in cold start problems. Later developments, inspired by document retrieval techniques like DSI_dsi_ and NCI_nci_, introduced tree IDs using multi-layer K-Means_kmeans_ to achieve discrete yet partially shared item tokens, though semantic discrepancies remained an issue. 
+Tokenizing items and users in recommender systems has involved numerous strategies. Traditional methods often use atomic item identifiers (IDs), which can result in cold start problems. Later developments, inspired by document retrieval techniques like DSI and NCI, introduced tree IDs using multi-layer K-Means to achieve discrete yet partially shared item tokens, though semantic discrepancies remained an issue. 
 
-To address this, one line of research applies _embedding-level reconstruction_ task. For example, Rajput et al. developed the TIGER model based on RQ-VAE_rq-vae_, consisting of three steps: extracting item embeddings from content, discretizing these embeddings via residual quantization, and applying the discretized item tokens for sequence recommendation. Due to the inherent nature of residual quantization that can organise the tokens in a hierarchical manner, such approach proved highly successful and foundational for future research_singh2023better,liu2024semantic,liu2024mmgrec,jin2024contrastive_. Subsequent projects like LC-REC_zheng2023adapting_ expanded on this by integrating item tokens into large models, hinting at the development of foundational recommendation models. Instead, some researchers_jin2023language_ optimize this process further at _text-level reconstruction_ by treating item tokenization as a translation task within an encoder-decoder-decoder framework, using standard VQ on the top of the first decoder outputs that also achieves substantial performance.
+To address this, one line of research applies _embedding-level reconstruction_ task. For example, Rajput et al. developed the TIGER model based on RQ-VAE, consisting of three steps: extracting item embeddings from content, discretizing these embeddings via residual quantization, and applying the discretized item tokens for sequence recommendation. Due to the inherent nature of residual quantization that can organise the tokens in a hierarchical manner, such approach proved highly successful and foundational for future research. Subsequent projects like LC-REC expanded on this by integrating item tokens into large models, hinting at the development of foundational recommendation models. Instead, some researchers_jin2023language_ optimize this process further at _text-level reconstruction_ by treating item tokenization as a translation task within an encoder-decoder-decoder framework, using standard VQ on the top of the first decoder outputs that also achieves substantial performance.
 
 However, the exploration of multimodal and multi-domain item tokenization remains limited, and this area presents a promising opportunity for advancing foundational recommender systems.
 
+## Future Directions
+
+In this section, we discuss the current challenges and emerging opportunities for future research in VQ4Rec.
+
+### Codebook Collapse Problem
+
+There are some limitations associated with the capability of VQ. For example, the challenge of codebook collapse may arise when only a minor portion of the codebook is effectively utilized. VQ-VAE employs STE to grant differentiability to VQ, consequently, many entries in the codebook remain unused or underutilized, restricting the model capacity to accurately represent and reconstruct input data. This core issue extends its impact to subsequent developments in recommender systems employing PQ-VAE and RQ-VAE, which impairs the recommender system's ability to offer varied and personalized recommendations to users as it fails to capture the diversity of the data. At present, preliminary endeavors have yielded encouraging results, with the scholarly community being urged to continue their research efforts in this direction.
+
+### Item Discovery
+
+In item tokenization scenarios, the codebook space significantly exceeds the number of items in the dataset, suggesting that many potential code combinations remain untapped. Providing human-readable description for these new code combinations, especially in generative recommendation, represents a valuable direction. For instance, in product recommendations, this can help merchants develop products tailored to user demands; in video recommendations, it allows platforms to create personalized content based on the description. Currently, code training mainly relies on item embedding reconstruction tasks. A viable alternative is an end-to-end reconstruction task based on item content such as title and description, where new code combinations are inputted into the decoder to generate the corresponding item content.
+
+### User Tokenization
+
+Current VQ encoding schemes primarily focus on item discretization and have shown success in generative recommendation scenarios. However, discretizing user representation, i.e., user tokenization, also presents significant opportunities for research. For instance, Liu et al. has achieved substantial storage efficiency by applying discretization to both user and item in click through rate prediction. A pressing challenge is to enhance the quality of user tokens, which could enable large models to offer personalized responses through model personalization.
+
+### Multimodal Generative Recommendation
+
+Item semantic tokenization is currently the leading method for indexing items in generative recommender systems. However, current methods are mostly text-based, although multimodal semantic tokenization has begun to emerge in tasks such as text-to-image and video segmentation. In the big data era, leveraging multimodal features offers a more comprehensive representation of items. Therefore, the development and application of multimodal tokenization techniques in recommender systems represents a critical advancement.
+
+### RS--LLM Alignment
+
+The significant success of large language models has established them as foundational elements across multiple fields. Current efforts increasingly focus on aligning object features from diverse domains with LLMs, enhancing their explainability and multimodal understanding. For example, LC-Rec has successfully finetuned discretized item IDs obtained by RQ-VAE on the LLaMA model, validating this strategy in the recommendation domain. Future endeavors could involve integrating data from various domains to develop a foundational recommendation model with versatile skills.
+
+### Codebook Quality Evaluation
+
+In some scenarios, the process of codebook generation and the recommendation task are not executed through end-to-end training. For instance, in item tokenization, item tokens are initially derived from item semantics before being evaluated in applications like sequential recommendation. Evaluating code quality through downstream tasks is both time-consuming and resource-intensive, suggesting a need for optimization. Therefore,  the exploration of methodologies for assessing code quality through the comparison of generated tokens against original inputs represents a significant and promising research direction.
+
+### Efficient Large-scale Recommender Systems
+
+As large-scale models proliferate, the demand for efficient model training and inference is escalating within the recommendation community. VQ is emerging as a promising tool for enhancing the efficiency of large recommender systems, alongside other popular techniques like distillation and quantization. For instance, Lingle et al. and Wu et al. have demonstrated that optimizing the attention mechanism through VQ can achieve linear time complexity in image generation and recommendation task, respectively. However, these approaches typically involve smaller models and embedding dimensions that can be efficiently handled using a single codebook. In contrast, for larger models like LLaMA, which has embedding dimensions as large as 4096, the straightforward use of VQ may not be as effective. Exploring the integration of parallel quantization techniques with linear attention could potentially offer a viable solution.
+
+## Conclusion
+
+VQ has become a pivotal element in the development of innovative solutions across various scenarios in recommender systems. With the advent of large language models, there has been a notable shift towards generative recommendation methods, where residual quantization has been widely adopted for its inherent advantages. However, the research of VQ4Rec is still in its early stage. This paper offers a comprehensive overview of current research in VQ4Rec, highlighting both efficiency-oriented and quality-oriented approaches. Additionally, we identify and discuss the open challenges and potential avenues for advancement. We hope this survey will foster continued exploration and innovation in VQ4Rec.

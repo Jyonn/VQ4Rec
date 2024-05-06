@@ -74,7 +74,7 @@ If you find this repository useful for your research, please consider citing our
 <details open>
 
 <summary>
-## Introduction
+<h2>Introduction</h2>
 </summary>
 
 <p align="center">

@@ -71,11 +71,7 @@ If you find this repository useful for your research, please consider citing our
 }
 ```
 
-<details open>
-
-<summary>
-<h2>Introduction</h2>
-</summary>
+## Introduction
 
 <p align="center">
 <img src="images/PaperCount.png" alt="paper count" width="500px"/>
@@ -98,12 +94,7 @@ Despite the growing interest in VQ4Rec amidst new challenges posed by large lang
 - We conduct a thorough analysis of the strengths, weaknesses, and limitations of existing VQ4Rec methods, focusing on addressing two main challenges in recommender system: efficiency and quality.
 - We identify key challenges in VQ4Rec and present promising opportunities that can serve as inspiration for future research in this burgeoning field.
 
-</details>
-
-<details open>
-<summary>
-<h2>Overview of VQ Techniques</h2>
-</summary>
+## Overview of VQ Techniques
 
 <p align="center">
 <img src="images/VQs.png" alt="VQ techniques" width="1000px"/>
@@ -135,6 +126,3 @@ where $N$ is the number of object vectors and $K$ is the number of code vectors 
 $$
 \mathbf{e}_i \approx \mathbf{c}_{x}.
 $$
-
-
-</details>

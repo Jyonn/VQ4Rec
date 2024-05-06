@@ -90,7 +90,7 @@ Recommender systems, a prominent application in the field of artificial intellig
 
 As shown in Figure 1, there has been a booming interest in vector quantization for recommender systems (**VQ4Rec**) over recent years.
 
-This body of research can be roughly categorized into **_efficiency-oriented_** and **_quality-oriented_**. The former focuses on optimizing large-scale systems, tackling challenges associated with large models, extensive datasets, and computational demands. In this context, VQ proves to be highly effective, significantly improving performance in crucial areas, including **similarity search**, **space compression**, and **model acceleration**. The latter prioritizes recommendation accuracy, concentrating on the refinement of feature usage. This involves optimizing features, fostering interactions among various modalities, and aligning features to enhance generative recommendation processes. It covers sub-scenarios such as **feature enhancement**, **modality alignment**, and **discrete tokenization**. Moreover, VQ has shown promise in integrating recommender systems with LLMs to improve recommendation quality. This is achieved by using VQ to effectively tokenize and structure recommendation-related data, such as information about items or users. For instance, generative retrieval methods~\cite{rajput2023recommender} leverage VQ to ensure that the recommendation data is well-aligned with LLMs. 
+This body of research can be roughly categorized into **_efficiency-oriented_** and **_quality-oriented_**. The former focuses on optimizing large-scale systems, tackling challenges associated with large models, extensive datasets, and computational demands. In this context, VQ proves to be highly effective, significantly improving performance in crucial areas, including **similarity search**, **space compression**, and **model acceleration**. The latter prioritizes recommendation accuracy, concentrating on the refinement of feature usage. This involves optimizing features, fostering interactions among various modalities, and aligning features to enhance generative recommendation processes. It covers sub-scenarios such as **feature enhancement**, **modality alignment**, and **discrete tokenization**. Moreover, VQ has shown promise in integrating recommender systems with LLMs to improve recommendation quality. This is achieved by using VQ to effectively tokenize and structure recommendation-related data, such as information about items or users. For instance, generative retrieval methods leverage VQ to ensure that the recommendation data is well-aligned with LLMs. 
  
 Despite the growing interest in VQ4Rec amidst new challenges posed by large language models, multimodal data, and generative AI, no work has yet systematically surveyed the application of VQ in recommender systems. This paper aims to bridge this gap through a comprehensive survey. We provide a thorough analysis of VQ4Rec, exploring its uses, challenges, and future directions in the field. The main contents and contributions of this paper are summarized as follows:
 - We present an overview of both classical and modern VQ techniques, encompassing standard VQ, parallel VQ, sequential VQ, and differentiable VQ.
@@ -124,13 +124,13 @@ VQ targets at grouping similar vectors into clusters by representing them with a
 
 The standard VQ~\citep{buzo1980speech,vq} serves as the atomic component for the latter two VQ techniques. Formally, given a set of object vectors $\mathbf{E} \in \mathbb{R}^{N \times D}$, a function $f$ (e.g., $k$-means) is required to produce a codebook $\mathbf{C} \in \mathbb{R}^{K \times D}$ such that the sum of distances between all vectors in $\mathbf{E}$ and their corresponding nearest code vectors in $\mathbf{C}$ is minimized, as illustrated in Figure~\ref{fig:vqs}(a). We can formally express this using the following equations:
 $$
-    f&: \mathbf{E} \rightarrow \mathbf{C}, \\
-    \textit{where }\mathbf{C} &= \underset{\mathbf{W} \in \mathbb{R}^{K \times D}}{\operatorname{argmin}} \sum_{i=1}^{N} d(\mathbf{e}_i, \mathbf{w}_{x}), \\
-    \textit{and }x &= \underset{j=1,\ldots,K}{\operatorname{argmin}}\, d\left(\mathbf{e}_i, \mathbf{w}_j\right),
+\displaylines{f: \mathbf{E} \rightarrow \mathbf{C}, \\
+\textit{where }\mathbf{C} = \underset{\mathbf{W} \in \mathbb{R}^{K \times D}}{\text{argmin}} \sum_{i} d(\mathbf{e}\_i, \mathbf{w}\_{x}), \\
+\textit{and }x = \underset{j=1,\ldots,K}{\text{argmin}}\, d\left(\mathbf{e}_i, \mathbf{w}_j\right),}
 $$
 where $N$ is the number of object vectors and $K$ is the number of code vectors in the codebook (usually $N \gg K$), $\mathbf{e}_i$ is the $i$-th object vector, $D$ is the embedding dimension, $d$ represents the distance function (e.g., Euclidean distance or Manhattan distance), $\mathbf{W}$ denotes any codebook in the same space as $\mathbf{C}$, and $x$ is the index of the code vector closest to $\mathbf{e}_i$. Therefore, we can use $\mathbf{c}_x$, the $x$-th code in codebook $\mathbf{C}$, to approximate $\mathbf{e}_i$:
 $$
-    \mathbf{e}_i \approx \mathbf{c}_{x}.
+\mathbf{e}_i \approx \mathbf{c}_{x}.
 $$
 
 

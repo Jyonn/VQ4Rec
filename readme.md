@@ -140,7 +140,7 @@ $$
 $$
 
 where $\mathbf{C}^{(j)}$ is the $j$-th codebook with size $K\_j$, and $x\_j$ is the index of the code vector in $\mathbf{C}^{(j)}$ closest to $\mathbf{e}\_i^{(j)}$.
-Due to its storage efficiency and capability for fast approximate nearest neighbor searches, product quantization has become a popular solution in the information retrieval domain, particularly for image retrieval tasks, as evidenced by several studies~\cite{cao2017deep,jang2021self,chen2022adversarial}. Nonetheless, it overlooks the potential for significant inter-correlations among sub-vectors, which may affect the quantization performance and subsequent downstream tasks.
+Due to its storage efficiency and capability for fast approximate nearest neighbor searches, product quantization has become a popular solution in the information retrieval domain, particularly for image retrieval tasks, as evidenced by several studies. Nonetheless, it overlooks the potential for significant inter-correlations among sub-vectors, which may affect the quantization performance and subsequent downstream tasks.
 
 #### Optimized Product Quantizaiton (OPQ)
 
@@ -151,7 +151,7 @@ $$
 \mathbf{I} = \mathbf{R}^T \times \mathbf{R},}
 $$
 
-where $\mathbf{E}^\prime$ is the rotated matrix, and $\mathbf{I}$ represents the identity matrix. Next, $\mathbf{E}^\prime$ will be operated by product quantization, as described in Sec~\ref{sec:pq}. It is important to note that the rotation matrix $\mathbf{R}$ is trained with the codebooks.
+where $\mathbf{E}^\prime$ is the rotated matrix, and $\mathbf{I}$ represents the identity matrix. Next, $\mathbf{E}^\prime$ will be operated by product quantization, as described in the above section. It is important to note that the rotation matrix $\mathbf{R}$ is trained with the codebooks.
 Once trained, the $i$-th original vector can be approximated by:
 
 $$
@@ -163,7 +163,7 @@ $$
 Standard VQ and parallel VQ typically yield _rough_ approximations of vectors. Specifically, each dimension of the original vector can only be approximated by one single value from the corresponding code vector, leading to substantial information loss. 
 Taking standard VQ as an example, the difference between the original vector $\mathbf{e}$ and its corresponding code $\mathbf{c}$, denoted by $\mathbf{e}-\mathbf{c}$, reflects the unique characteristics that cannot be represented by $\mathbf{c}$.
 
-To achieve a more _precise_ quantization, approaches like residual quantization~\cite{juang1982multiple,rq} and additive quantization~\cite{aq} have been developed, falling under the umbrella of sequential quantization. This method employs multiple codebooks, with each codebook approximates every dimension of the original vectors. Essentially, every codebook offers a distinct approximation perspective of the vectors, and the accuracy of these approximations improves with an increase in the number of codebooks. As illustrated in Figure 2, using the first layer codebook approximates `0.3` (the first dimension of the original vector) as `0.5` (the first dimension of the code vector in the first codebook). After applying the second codebook, it is more accurately approximated as `0.5 + (-0.3) = 0.2` (the first dimension of the code vector in the second codebook).
+To achieve a more _precise_ quantization, approaches like residual quantization and additive quantization have been developed, falling under the umbrella of sequential quantization. This method employs multiple codebooks, with each codebook approximates every dimension of the original vectors. Essentially, every codebook offers a distinct approximation perspective of the vectors, and the accuracy of these approximations improves with an increase in the number of codebooks. As illustrated in Figure 2, using the first layer codebook approximates `0.3` (the first dimension of the original vector) as `0.5` (the first dimension of the code vector in the first codebook). After applying the second codebook, it is more accurately approximated as `0.5 + (-0.3) = 0.2` (the first dimension of the code vector in the second codebook).
 
 #### Residual Quantization (RQ)
 
@@ -179,3 +179,19 @@ It is important to note that, as $M$ increases, the approximated representation 
 #### Additive Quantization (AQ)
 
 Similar to residual quantization, additive quantization aims to approximate the target vectors by aggregating one selected code per codebook. However, residual quantization employs a greedy approach by selecting only the _nearest_ neighbor (i.e., $\mathbf{c}^{(j)}\_{x\_j}$) within the current (i.e., $j$-th) layer, which does not guarantee the global optimum. Instead, codebooks here are sequentially learned using beam search, where top candidate code combinations (_not the only one_) from the first $j$ codebooks are selected to infer the $(j+1)$-th codebook. Hence, the $i$-th original vector can be approximated just as that in residual quantization.
+
+### Differentiable Vector Quantization
+
+The technique of VQ fundamentally includes a non-differentiable procedure, which entails identifying the nearest code in the codebook, consequently making the calculation of gradients impractical. This lack of differentiability presents a substantial hurdle in neural network training, which relies heavily on gradient-based optimization methods. Consequently, in the wake of the VQ-VAE, numerous research initiatives have adopted the Straight-Through Estimator (STE) as a leading solution to this challenge.
+
+The core idea of STE is relatively straightforward: during the forward pass of a network, the non-differentiable operation (like quantization) is performed as usual. However, during the backward pass, when gradients are propagated back through the network, STE allows gradients to "pass through" the non-differentiable operation as if it were differentiable. This is typically done by approximating the derivative of the non-differentiable operation with a constant value, often 1, which can be defined as:
+
+$$
+\frac{\partial \mathbf{c}_x}{\partial \mathbf{e}\_i} \approx \frac{\partial \mathbf{e}\_i}{\partial \mathbf{e}\_i} = \mathbf{I},
+$$
+
+where $\mathbf{I}$ is the identity matrix.
+
+However, training with straight-through estimator often encounters the codebook collapse issue, wherein a significant portion of codes fails to map onto corresponding vectors. Various strategies, such as employing exponential moving average (EMA) during training or implementing codebook reset mechanisms, have been developed to address this challenge.
+
+In the above discussion, we have reviewed established vector quantization techniques, but have not delved into recent innovations such as finite scalar quantization (FSQ). Drawing inspiration from model quantization, FSQ adopts a straightforward rounding mechanism to approximate the value in each dimension of a vector. FSQ has yielded competitive results comparable to those achieved by VQ-VAE in image generation. While FSQ has not yet been applied to recommender systems, it presents a promising avenue for future exploration.
